@@ -1,0 +1,1 @@
+{"root":["./src/main.ts","./src/types.ts","./src/vite-env.d.ts","./src/App.vue","./src/components/FitlerButton.vue","./src/components/TaskForm.vue","./src/components/TaskList.vue"],"version":"5.7.3"}
