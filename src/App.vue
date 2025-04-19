@@ -5,20 +5,20 @@ import { Task, TaskFilter } from './types';
 import TaskList from './components/TaskList.vue';
 import FitlerButton from './components/FitlerButton.vue';
 
-const message = ref("Task-App")
+const message = ref("Aplicativo de Tarefas")
 const tasks = ref<Task[]>([])
-const filter = ref<TaskFilter>("all");
+const filter = ref<TaskFilter>("Todas");
 
 const totalDone = computed(() => tasks.value.reduce((total, task) => task.done ? total + 1 : total, 0))
 
 const filteredTasks = computed(() => {
   switch (filter.value) {
-    case "all":
+    case "Todas":
       return tasks.value;
-    case "done":
-      return tasks.value.filter((tasks) => tasks.done)
-    case "todo":
+    case "Falta":
       return tasks.value.filter((tasks) => !tasks.done)
+    case "Concluidas":
+      return tasks.value.filter((tasks) => tasks.done)
   }
   return tasks.value
 })
@@ -55,12 +55,12 @@ function setFilter(value: TaskFilter) {
   <main>
     <h1>{{ message }}</h1>
     <TaskForm @addTask="addTask" />
-    <h3 v-if="!tasks.length">Add a task to get started.</h3>
-    <h3 v-else> {{ totalDone }} / {{ tasks.length }} tasks completed</h3>
+    <h3 v-if="!tasks.length">Adicione uma tarefa para começar.</h3>
+    <h3 v-else> {{ totalDone }} / {{ tasks.length }} tarefas concluídas</h3>
     <div v-if="tasks.length" class="button-container">
-      <FitlerButton :currentFilter="filter" filter="all" @setFilters="setFilter" />
-      <FitlerButton :currentFilter="filter" filter="todo" @setFilters="setFilter" />
-      <FitlerButton :currentFilter="filter" filter="done" @setFilters="setFilter" />
+      <FitlerButton :currentFilter="filter" filter="Todas" @setFilters="setFilter" />
+      <FitlerButton :currentFilter="filter" filter="Falta" @setFilters="setFilter" />
+      <FitlerButton :currentFilter="filter" filter="Concluidas" @setFilters="setFilter" />
     </div>
     <TaskList :tasks="filteredTasks" @toggle-done="toggleDone" @removeTask="removeTask" />
   </main>
@@ -77,4 +77,30 @@ main {
   justify-content: end;
   gap: 0.5rem;
 }
+
+@media (max-width: 768px) {
+  main {
+    padding: 0.5rem;
+    max-width: 95%;
+  }
+  
+  h1 {
+    font-size: 1.5rem;
+  }
+}
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.3rem;
+  }
+  
+  h3 {
+    font-size: 0.9rem;
+  }
+  
+  .button-container {
+    align-items: center;
+    gap: 0.3rem;
+  }
+}
+
 </style>

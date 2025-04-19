@@ -4,4 +4,4 @@ export interface Task {
     done: boolean
 }
 
-export type TaskFilter = "all" | "todo" | "done"
+export type TaskFilter = "Todas" | "Falta" | "Concluidas"

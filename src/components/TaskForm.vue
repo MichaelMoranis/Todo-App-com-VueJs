@@ -22,14 +22,14 @@ function formSubmited() {
 <template>
     <form @submit.prevent="formSubmited">
         <label for="tasks-app">
-            New Task
+            Nova tarefa
             <input v-model="newTask" name="newTask" :aria-invalid="!!error || undefined">
             <small v-if="error" id="invalid-helper">
                 {{ error }}
             </small>
         </label>
         <div class="button-container">
-            <button>Add</button>
+            <button>Adicionar</button>
         </div>
     </form>
 </template>
